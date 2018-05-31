@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Content Distribution Widget</title>
+	<meta name="description" content="Trusted global distribution of digital content">
+	<meta name="author" content="Shuffledex">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel="stylesheet" type='text/css'/>
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' rel="stylesheet" type='text/css'/>
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' rel="stylesheet" type='text/css'/>
+	<link href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' rel='stylesheet' type='text/css' />
+	<link href='main.css' rel='stylesheet' type='text/css' />
+</head>
+<body id="configuration">
+
+	<div class="loading">
+		<div class="loader">
+			<svg width="48" height="48" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" version="1.1">
+				<path d="M 150,0 a 150,150 0 0,1 106.066,256.066 l -35.355,-35.355 a -100,-100 0 0,0 -70.711,-170.711 z" fill="#76f19a">
+					<animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 150 150" to="360 150 150" begin="0s" dur=".5s" fill="freeze" repeatCount="indefinite"></animateTransform>
+				</path>
+			</svg>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="seven columns">
+				<div class="row">
+					<h3>Let’s customize what your customers will see</h3>
+					<form>
+						<div class="row">
+							<label for="content">Content URL</label>
+							<input class="u-full-width" type="text" placeholder="The content your user will download" id="content" value="http://www.cd.com/allZip.zip">
+							<label for="price">Price</label>
+							<input class="u-full-width" type="text" placeholder="Enter the price of the download (in NAS)" id="price" value="0.0001">
+							<label for="title">Title</label>
+							<input class="u-full-width" type="text" placeholder="Content title goes here" id="title" value="Themeforest Design">
+							<label for="introduction">Introduction</label>
+							<textarea class="u-full-width" placeholder="Small introduction of the content" id="introduction">Download all zip of Themeforest</textarea>
+						</div>
+					</form>
+				</div>
+				<div class="row">
+					<h5>Configuration details</h5>
+					<form>
+						<div class="row">
+							<label for="wallet">Wallet</label>
+							<input class="u-full-width" type="text" placeholder="Wallet address to which the NAS will be forwarded" id="wallet" value="n1bRj1aAXHiueat9nVdPGHC9rVihL1KmuXL">
+							<input type="hidden" id="hash" disabled="disabled" />
+							<a class="button button-primary u-pull-right" href="javascript:generateWidget()">Generate Widget</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="five columns card-container manual-flip">
+				<div class="card">
+					<div class="row widgetLike front">
+						<h6>What your widget will look like</h6>
+						<div class="buttonFlip">
+							<a class="button button-primary flip" href="#" onclick="rotateCard(this)">View Code <i class="fas fa-sync-alt"></i></a>
+						</div>
+						<div id="widget">
+							<p class="title">Your title will be here...</p>
+							<p class="introduction">Your introduction will be here...</p>
+							<a class="button button-primary u-full-width buy" href="#">Buy for <span id="nasPrice">0</span> NAS</a>
+							<p class="u-pull-right"><img src="images/nebulas.png" style="width:75px" /></p>
+						</div>
+					</div>
+					<div class="row back" style="text-align: center">
+						<div class="buttonFlip">
+							<a class="button button-primary flip" href="#" onclick="rotateCard(this)">View Widget <i class="fas fa-sync-alt"></i></a>
+						</div>
+						<div class="row scriptWrapper">
+							<div style="text-align: center">
+								<i class="fas fa-code code"></i>
+							</div>
+							<p class="copy"><b>Copy & paste the code</b> below into your website to display a widget for your customers to purchase this content.</p>
+							<textarea class="u-full-width" id="script"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="noExtension"> 
+		Please install <a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> to create a new widget
+	</div>
+	<div class="errNetwork">
+		You are using a wrong Nebulas network
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+	<script src="libs/nebPay.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

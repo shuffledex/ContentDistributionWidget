@@ -1,257 +1,149 @@
-$(function() {
-	const NebPay = require("nebpay");
-	const nebPay = new NebPay();
-	const CREATE = "create";
-	const JOIN = "join";
+var serialNumber;
+var intervalQuery;
+var NebPay = require("nebpay");
+var nebPay = new NebPay();
+var dappAddress = "n1pA5croyqgYBB1KDAwsKoNgUhmJSKhDWbK";
+var url = "";
 
-	var serialNumber;
-	var intervalQuery;
-	var moves = {
-		one: null,
-		two: null,
-		three: null
-	};
-	var modalStatus;
-	const callbackUrl = NebPay.config.mainnetUrl;
-	const contract = "n1fwefx8GECMgNWX8HRvUtt78PETod2MZgT";
-	/*
-		b8bbb38b47e8781bf6b11dd5c94704f7e384c2db7d34bda6726aa5ec080f7408
-	*/
-	//const callbackUrl = NebPay.config.testnetUrl;
-	//const contract = "n1nRaWFtRoWB6oUFAqBNneE8XMMGGNdATQZ";
+//const endpoint = NebPay.config.mainnetUrl;
+const endpoint = NebPay.config.testnetUrl;
 
-	getStats();
+window.onload = function() {     
+    if (typeof(webExtensionWallet) === "undefined") {     
+        $(".noExtension").show();     
+        $(".container").hide();
+    }
+};
 
-	function getStats() {
+$(document).ready(function() {                 
+    nebPay.simulateCall(dappAddress, 0, "dummy", null, { 
+        listener: cbSearch
+    });
+})
 
-		var to = contract;
-		var value = 0;
-		var callFunction = "getStats";
-		var callArgs = null;
-
-		nebPay.simulateCall(to, value, callFunction, callArgs, {
-			qrcode: {
-			    showQRCode: false
-			},
-			listener: getStatsListener
-		});
-	}
-
-	function getStatsListener(response) {
-		if (response.execute_err == "" || response.execute_err == "insufficient balance") {
-			var result = JSON.parse(response.result);
-			$("#gamesCreated").html(result.games);
-			$("#nasTransacted").html(toNas(result.value));
-		} else {
-			setTimeout(function() {
-				getStats()
-			}, 5000);
-		}
-	};
-
-	function getGames() {
-
-		var to = contract;
-		var value = 0;
-		var callFunction = "getGames";
-		var callArgs = null;
-
-		nebPay.simulateCall(to, value, callFunction, callArgs, {
-			qrcode: {
-			    showQRCode: false
-			},
-			listener: getGamesListener
-		});
-	};
-
-	function getGamesListener(response) {
-		if (response.execute_err == "" || response.execute_err == "insufficient balance") {
-			var result = JSON.parse(response.result);
-			$('#gamesToJoin').html("");
-			result.forEach(function(element) {
-				$('#gamesToJoin').append('<tr>\
-					<td>'+element.game+'</td>\
-					<td>'+toNas(element.value)+'</td>\
-					<td><a class="button button-primary" href="#create" rel="modal:open" id="joinMatch" data-game="'+element.game+'" data-value="'+toNas(element.value)+'">Join</a></td>\
-					</tr>');
-			})
-		} else {
-			setTimeout(function() {
-				getGames()
-			}, 5000);
-		}
-	};
-
-	function getLedger() {
-
-		var to = contract;
-		var value = 0;
-		var callFunction = "getLedger";
-		var callArgs = null;
-
-		nebPay.simulateCall(to, value, callFunction, callArgs, {
-			qrcode: {
-			    showQRCode: false
-			},
-			listener: getLedgerListener
-		});
-	};
-
-	function getLedgerListener(response) {
-		if (response.execute_err == "" || response.execute_err == "insufficient balance") {
-			var result = JSON.parse(response.result);
-
-			$('#ledgerList').html("")
-
-			result.forEach(function(element) {
-				var yourMovesHTML = "";
-				var oppMovesHTML = "";
-				(element.yourMoves).forEach((move) => {
-					yourMovesHTML = yourMovesHTML + '<i class="far fa-hand-'+move+'"></i> '
-				});
-
-				(element.opponentMoves).forEach((move) => {
-					oppMovesHTML = oppMovesHTML + '<i class="far fa-hand-'+move+'"></i> '
-				});
-
-				var html = '<tr>\
-								<td>\
-									<div class="row">\
-										<div class="six columns">\
-											You\
-										</div>\
-										<div class="six columns">\
-											'+yourMovesHTML+'\
-										</div>\
-									</div>\
-									<div class="row">\
-										<div class="six columns">\
-											Opp\
-										</div>\
-										<div class="six columns">\
-											'+oppMovesHTML+'\
-										</div>\
-									</div>\
-								</td>\
-								<td class="'+element.result+'">'+element.result+' '+toNas(element.value)+'</td>\
-								<td><a class="button button-primary" href="https://explorer.nebulas.io/#/tx/'+element.hash+'" style="padding:0 15px" target="_blank">View</a></td>\
-							</tr>';
-
-				$('#ledgerList').append(html)
-			})
-
-		} else {
-			setTimeout(function() {
-				getLedger()
-			}, 5000);
-		}
-	};
-
-	$('a[data-modal]').on('click', function() {
-		$($(this).data('modal')).modal({
-			fadeDuration: 100
-		});
-		getGames()
-		getLedger()
-		return false;
-	});
-
-	$('.btn-switcher').click(function (e) {
-		$(this).addClass("selected").siblings().removeClass("selected");
-		moves[$(this).parent().attr("data-round")] = $(this).children().attr("data-choice");
-	});
-
-	$('#btn-create').click(function (e) {
-
-	    var to = contract;
-		var value = $("#bet").val();
-		var callFunction;
-	    
-	    var callArgs = [];
-
-		if (modalStatus == CREATE) {
-			callFunction = "create";
-		}
-		if (modalStatus == JOIN) {
-			callFunction = "play";
-			callArgs.push($("#address").val())
-		}
-
-	    callArgs.push(moves.one)
-	    callArgs.push(moves.two)
-	    callArgs.push(moves.three)
-	    callArgs = JSON.stringify(callArgs);
-
-		serialNumber = nebPay.call(to, parseFloat(value), callFunction, callArgs, {
-			qrcode: {
-				showQRCode: false
-			},
-			callback: callbackUrl,
-			listener: createListener
-		});
-		intervalQuery = setInterval(function() {
-			createIntervalQuery();
-		}, 20000);
-
-		$('#waiting').modal();
-
-		return false;
-	});
-
-	function createListener(response) {
-	};
-
-	function createIntervalQuery() {
-		nebPay.queryPayInfo(serialNumber, {
-			callback: callbackUrl
-		})
-		.then(function(response) {
-			var respObject = JSON.parse(response)
-			if (respObject.code === 0) {
-				clearInterval(intervalQuery);
-			}
-			console.log(response)
-		})
-		.catch(function(err) {
-			console.log(JSON.stringify(err));
-		});
-	};
-
-	function toNas(value) {
-		return parseInt(value) * Math.pow(10,(-18));
-	};
-
-	$('.create-modal').on($.modal.BEFORE_CLOSE, function(event, modal) {
-		moves = {
-			one: null,
-			two: null,
-			three: null
-		}
-		$("#bet").val("");
-		$('.create-modal').find("li").removeClass("selected");
-	});
-
-	$("div .create").on("click", function() {
-		modalStatus = CREATE
-		$("#create .title").html("Create game")
-		$("#create #btn-create").html("Create")
-		$("#create #bet").css("display", "block")
-		$("#create #willBet").css("display", "none")
-	});
-
-	$(document).on("click", "a#joinMatch", function() {
-		modalStatus = JOIN
-		var game = $(this).attr("data-game")
-		var value = $(this).attr("data-value")
-
-		$("#create .title").html("Match vs. " + game)
-		$("#create #btn-create").html("Join")
-		$("#create #bet").css("display", "none")
-		$("#create #willBet").css("display", "block")
-		$("#create #willBet strong").html(value)
-
-		$("#create #bet").val(value)
-		$("#create #address").val(game)
-	});
-
+$('#price').on('input', function() { 
+    $('#widget').find('#nasPrice').html($(this).val())
+    if ($(this).val() == "") {
+       $('#widget').find('#nasPrice').html("0") 
+    }
 });
+
+$('#title').on('input', function() { 
+    $('#widget').find('.title').html($(this).val())
+    if ($(this).val() == "") {
+       $('#widget').find('.title').html("Your title will be here...") 
+    }
+});
+
+$('#introduction').on('input', function() { 
+    $('#widget').find('.introduction').html($(this).val())
+    if ($(this).val() == "") {
+       $('#widget').find('.introduction').html("Your introduction will be here...") 
+    }
+});
+
+function cbSearch(resp) {
+    var result = resp.result;          
+    if (result === '') {
+        $(".errNetwork").show();
+        $(".container").hide();
+    }
+}
+
+function generateWidget() {
+    $('.buttonFlip').hide();
+    $('.loading').hide();
+
+    var wallet = $("#wallet").val();
+    var website = $("#website").val();
+    var content = $("#content").val();
+    var price = $("#price").val();
+    var title = $("#title").val();
+    var introduction = $("#introduction").val();
+    
+    if (wallet == "" || content == "" || price == "" || title == "" || introduction == "") {
+        alert("Please fill in all the options");
+        return false;
+    }
+
+    var hash = _randomHash(10, '01234567890abcdefghijklmnopqrstsuvxyzABCDEFGHIJKLMNOPQRSTUVXYZ');
+    $('#hash').val(hash);
+
+    var callArgs = [];
+    callArgs.push(hash);
+    callArgs.push(wallet);
+    callArgs.push(_encrypt(content));
+    callArgs.push(parseFloat(price) * (10 ** 18));
+    callArgs = JSON.stringify(callArgs);
+
+    serialNumber = nebPay.call(dappAddress, 0, "saveContent", callArgs, {
+        callback: endpoint,
+        listener: showScript
+    });
+    intervalQuery = setInterval(function() {
+        intervalQueryFn();
+    }, 20000);
+}
+
+function intervalQueryFn() {
+    nebPay.queryPayInfo(serialNumber, {
+        callback: endpoint
+    })
+    .then(function(response) {
+        var respObject = JSON.parse(response)
+        console.log("intervalQueryFn", respObject)
+        if (respObject.code === 0) {
+            clearInterval(intervalQuery);
+            $('.buttonFlip').show();
+            $('.loading').hide();
+            rotateCard($(".flip").first());
+            window.scrollTo(0, 0);
+            $("#target :input").prop("disabled", true);
+            var script = '<div id="contentDistributionWidget" data-price="' + $("#price").val() + '" data-title="' + $("#title").val() + '" data-introduction="' + $("#introduction").val() + '" data-wallet="' + $('#hash').val() + '" data-content="' + $('#content').val() + '"></div><script src="' + url + 'party/widget.js"></script>' 
+            $('#script').val(script);
+        } else {}
+    })
+    .catch(function(err) {
+        console.log("err", err)
+        clearInterval(intervalQuery);
+    });
+};
+
+function _encrypt(str) {
+    if (!str) str = "";
+    str = (str == "undefined" || str == "null") ? "" : str;
+    try {
+        var key = 146;
+        var pos = 0;
+        ostr = '';
+        while (pos < str.length) {
+            ostr = ostr + String.fromCharCode(str.charCodeAt(pos) ^ key);
+            pos += 1;
+        }
+        return ostr;
+    } catch (ex) {
+        return '';
+    }
+}
+
+function showScript(response) {
+    if (typeof response === "object") {
+        $('.loading').show();
+    }
+    console.log("showScript", response)
+}
+
+function _randomHash(length, chars) {
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+}
+
+function rotateCard(btn) {
+    var $card = $(btn).closest('.card-container');
+    if ($card.hasClass('hover')) {
+        $card.removeClass('hover');
+    } else {
+        $card.addClass('hover');
+    }
+}

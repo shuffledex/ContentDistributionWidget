@@ -2,190 +2,25 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Rock Paper Scissors Blockchain game</title>
-	<meta name="description" content="Play the classic hand game Rock Paper Scissors in the Blockchain and win some NAS">
+	<title>Content Distribution Widget</title>
+	<meta name="description" content="Trusted global distribution of digital content">
 	<meta name="author" content="Shuffledex">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel="stylesheet" type='text/css'/>
-	<link href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' rel="stylesheet" type='text/css'/>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' rel="stylesheet" type='text/css'/>
 	<link href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' rel='stylesheet' type='text/css' />
 	<link href='main.css' rel='stylesheet' type='text/css' />
 </head>
-<body>
+<body id="index">
 
 	<div class="container">
-		<section class="header">
-			<h2>Play the classic hand game <i class="far fa-hand-rock"></i> <i class="far fa-hand-paper"></i> <i class="far fa-hand-scissors"></i> in the Blockchain and win some NAS</h2>
-			<div class="value-props row">
-				<div class="four columns value-prop">
-					<i class="fas fa-hand-paper value-img"></i>
-					Create a new game, choose the move for every round and bet the amount of NAS you want.
-				</div>
-				<div class="four columns value-prop">
-					<i class="fas fa-gamepad value-img"></i>
-					To play a match created by other user, you will need to bet the same amount your opponent did.
-				</div>
-				<div class="four columns value-prop">
-					<i class="fas fa-trophy value-img"></i>
-					The match winner will receive the funds raised. In case of tie, the funds will be returned to every player.
-				</div>
-			</div>
-		</section>
-
-		<div class="row buttons">
-			<a class="button create" href="#" data-modal="#create">Create game</a>
-			<h5 class="separator">or</h5>
-			<a class="button join" href="#" data-modal="#join">Join match</a>
-			<h5 class="separator">or</h5>
-			<a class="button history" href="#" data-modal="#ledger">Match history</a>
-		</div>
-
-		<p class="install">You have to install <a href="https://github.com/ChengOrangeJu/WebExtensionWallet" target="_blank">WebExtensionWallet</a> to play.</p>
-
-		<div class="row stats">
-			<div class="six columns">
-				<h2 id="gamesCreated">...</h2> games created
-			</div>
-			<div class="six columns">
-				<h2 id="nasTransacted">...</h2> NAS transacted
-			</div>
-		</div>
+		<h1>Trusted global distribution of digital content</h1>
+		<h5>Share your content, we provide the Nebulas payment engine!</h5>
+		<i class="fab fa-telegram-plane"></i>
+		<a class="button button-primary" href="configuration.html">Create Widget</a>
 	</div>
 
-	<form id="create" class="create-modal">
-		<h4 class="title">Create game</h4>
-		<div class="row">
-			<div class="four columns round">
-				Round one
-			</div>
-			<div class="eight columns">
-				<ul data-round="one">
-					<li class="btn btn-switcher"><i class="far fa-hand-rock" data-choice="rock"></i></li>
-					<li class="btn btn-switcher"><i class="far fa-hand-paper" data-choice="paper"></i></li>
-					<li class="btn btn-switcher"><i class="far fa-hand-scissors" data-choice="scissors"></i></li>
-				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns round">
-				Round two
-			</div>
-			<div class="eight columns">
-				<ul data-round="two">
-					<li class="btn btn-switcher"><i class="far fa-hand-rock" data-choice="rock"></i></li>
-					<li class="btn btn-switcher"><i class="far fa-hand-paper" data-choice="paper"></i></li>
-					<li class="btn btn-switcher"><i class="far fa-hand-scissors" data-choice="scissors"></i></li>
-				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns round">
-				Round three
-			</div>
-			<div class="eight columns">
-				<ul data-round="three">
-					<li class="btn btn-switcher"><i class="far fa-hand-rock" data-choice="rock"></i></li>
-					<li class="btn btn-switcher"><i class="far fa-hand-paper" data-choice="paper"></i></li>
-					<li class="btn btn-switcher"><i class="far fa-hand-scissors" data-choice="scissors"></i></li>
-				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<div class="four columns round bet">
-				NAS bet
-			</div>
-			<div class="eight columns">
-				<input type="text" placeholder="" id="bet" />
-				<span id="willBet">You'll bet <strong>0.00001</strong></span>
-			</div>
-		</div>
-
-		<input type="text" id="address" disabled="disabled" />
-
-		<div class="row">
-			<a class="button u-full-width" id="btn-create">Create</a>
-		</div>
-	</form>
-
-	<form id="join" class="join-modal">
-		<h4 class="title">Join match</h4>
-		<div class="row">
-			<table class="u-full-width">
-				<thead>
-					<tr>
-						<th>Opponent</th>
-						<th>Bet</th>
-						<th></th>
-					</tr>
-				</thead>
-				<tbody id="gamesToJoin">
-					<tr>
-						<td>...</td>
-						<td>...</td>
-						<td>...</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</form>
-
-	<form id="ledger" class="ledger-modal">
-		<h4 class="title">Your history</h4>
-		<div class="row">
-			<table class="u-full-width">
-				<thead>
-					<tr>
-						<th>Match</th>
-						<th>Result</th>
-						<th>Tx</th>
-					</tr>
-				</thead>
-				<tbody id="ledgerList">
-					<tr>
-						<td>
-							<div class="row">
-								<div class="six columns">
-									You
-								</div>
-								<div class="six columns">
-									...
-								</div>
-							</div>
-							<div class="row">
-								<div class="six columns">
-									Opp
-								</div>
-								<div class="six columns">
-									..
-								</div>
-							</div>
-						</td>
-						<td>...</td>
-						<td>...</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</form>
-
-	<form id="waiting" class="waitin-modal">
-		<h5 style="text-align: center; font-weight: 600">Now you have to confirm the transaction and wait the status result.</h5>
-		<p>If you got a <span class="error">TxReceipt Status fail</span> we suggest read this common errors:</p>
-		<ul style="font-size: 12px">
-			<li>If you have a game that never was played, you can not create other</li>
-			<li>You can not bet 0 NAS</li>
-			<li>Make sure you choose the three moves</li>
-			<li>You can not play you own game</li>
-		</ul>
-	</form>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-	<script src="nebPay.js"></script>
-	<!--script src="bignumber.min.js"></script-->
-	<script src="main.js"></script>
 </body>
 </html>
