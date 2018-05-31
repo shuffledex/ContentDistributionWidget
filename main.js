@@ -98,7 +98,7 @@ function intervalQueryFn() {
             $('.loading').hide();
             rotateCard($(".flip").first());
             window.scrollTo(0, 0);
-            $("#target :input").prop("disabled", true);
+            $(":input").prop("disabled", true);
             var script = '<div id="contentDistributionWidget" data-price="' + $("#price").val() + '" data-title="' + $("#title").val() + '" data-introduction="' + $("#introduction").val() + '" data-wallet="' + $('#hash').val() + '"></div><script src="https://shuffledex.github.io/ContentDistributionWidget/party/widget.min.js"></script>' 
             $('#script').val(script);
         } else {}
