@@ -143,7 +143,8 @@ body {
 
 .noExtension,
 .errNetwork,
-.buttonFlip {
+.buttonFlip,
+.loading {
 	display: none
 }
 
