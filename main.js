@@ -3,7 +3,7 @@ var intervalQuery;
 var NebPay = require("nebpay");
 var nebPay = new NebPay();
 var dappAddress = "n1pA5croyqgYBB1KDAwsKoNgUhmJSKhDWbK";
-var url = "";
+var url = "https://shuffledex.github.io/ContentDistributionWidget";
 
 //const endpoint = NebPay.config.mainnetUrl;
 const endpoint = NebPay.config.testnetUrl;
