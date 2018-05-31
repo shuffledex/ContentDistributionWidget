@@ -6585,15 +6585,15 @@ javascript:(function() {
 
 var e = document.getElementById('contentDistributionWidget');
 e.innerHTML = generateWidgetHtml();
-var dappAddress = "n1pA5croyqgYBB1KDAwsKoNgUhmJSKhDWbK";
+var dappAddress = "n1tXRd7sY5599xVT9nYcDUf544otMjd6xwU";
 var intervalQuery;
 var NebPay = require("nebpay");
 var nebPay = new NebPay();
 var txHash;
-//const endpoint = "https://pay.nebulas.io/api/mainnet/pay";
-const endpoint = "https://pay.nebulas.io/api/pay";
-//const rpcEndpoint = "https://mainnet.nebulas.io";
-const rpcEndpoint = "https://testnet.nebulas.io";
+const endpoint = "https://pay.nebulas.io/api/mainnet/pay";
+//const endpoint = "https://pay.nebulas.io/api/pay";
+const rpcEndpoint = "https://mainnet.nebulas.io";
+//const rpcEndpoint = "https://testnet.nebulas.io";
 
 function nasPayment() {
 

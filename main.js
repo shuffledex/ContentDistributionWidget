@@ -2,10 +2,11 @@ var serialNumber;
 var intervalQuery;
 var NebPay = require("nebpay");
 var nebPay = new NebPay();
-var dappAddress = "n1pA5croyqgYBB1KDAwsKoNgUhmJSKhDWbK";
+var dappAddress = "n1tXRd7sY5599xVT9nYcDUf544otMjd6xwU";
+/* d22882dd28c7d8e8c5e5cc6d552f1709c23c53db247fecaccb3a1a50ca97cf5d */
 
-//const endpoint = NebPay.config.mainnetUrl;
-const endpoint = NebPay.config.testnetUrl;
+const endpoint = NebPay.config.mainnetUrl;
+//const endpoint = NebPay.config.testnetUrl;
 
 window.onload = function() {     
     if (typeof(webExtensionWallet) === "undefined") {     

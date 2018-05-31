@@ -46,10 +46,6 @@ ContentDistribution.prototype = {
         return contentPool.content
     },
 
-    debug: function(key) {
-        return this.contentPool.get(key);
-    },
-
     dummy: function() {
         return true
     }
