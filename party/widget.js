@@ -6626,13 +6626,21 @@ function intervalQueryFn() {
         var respObject = JSON.parse(response)
         if (respObject.code === 0) {
             clearInterval(intervalQuery);
-            $.post(rpcEndpoint + "/v1/user/getEventsByHash", JSON.stringify({"hash": respObject.data.hash}), function(result) {
-                window.location.href = _decrypt(JSON.parse(result.result.events[2].data).execute_result.slice(1, -1))
-            });
+            _call(respObject);
         }
     })
     .catch(function(err) {
     });
+}
+
+function _call(respObject) {
+  $.post(rpcEndpoint + "/v1/user/getEventsByHash", JSON.stringify({"hash": respObject.data.hash}), function(result, status, xhr) {
+    if (status == "success") {
+      window.location.href = _decrypt(JSON.parse(result.result.events[2].data).execute_result.slice(1, -1))
+    } else {
+      _call(respObject)
+    }
+  });
 }
 
 function _decrypt(str) {
