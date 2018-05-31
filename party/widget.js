@@ -6634,10 +6634,14 @@ function intervalQueryFn() {
 }
 
 function _call(respObject) {
-  $.post(rpcEndpoint + "/v1/user/getEventsByHash", JSON.stringify({"hash": respObject.data.hash}), function(result, status, xhr) {
-    if (status == "success") {
+  $.ajax({
+    type: 'POST',
+    url: rpcEndpoint + "/v1/user/getEventsByHash",
+    data: JSON.stringify({"hash": respObject.data.hash}),
+    success: function(result) {
       window.location.href = _decrypt(JSON.parse(result.result.events[2].data).execute_result.slice(1, -1))
-    } else {
+    },
+    error: function(xhr, textStatus, error) {
       _call(respObject)
     }
   });
