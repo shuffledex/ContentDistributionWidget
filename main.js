@@ -3,7 +3,6 @@ var intervalQuery;
 var NebPay = require("nebpay");
 var nebPay = new NebPay();
 var dappAddress = "n1pA5croyqgYBB1KDAwsKoNgUhmJSKhDWbK";
-var url = "https://shuffledex.github.io/ContentDistributionWidget";
 
 //const endpoint = NebPay.config.mainnetUrl;
 const endpoint = NebPay.config.testnetUrl;
@@ -99,7 +98,7 @@ function intervalQueryFn() {
             rotateCard($(".flip").first());
             window.scrollTo(0, 0);
             $("#target :input").prop("disabled", true);
-            var script = '<div id="contentDistributionWidget" data-price="' + $("#price").val() + '" data-title="' + $("#title").val() + '" data-introduction="' + $("#introduction").val() + '" data-wallet="' + $('#hash').val() + '" data-content="' + $('#content').val() + '"></div><script src="' + url + 'party/widget.js"></script>' 
+            var script = '<div id="contentDistributionWidget" data-price="' + $("#price").val() + '" data-title="' + $("#title").val() + '" data-introduction="' + $("#introduction").val() + '" data-wallet="' + $('#hash').val() + '" data-content="' + $('#content').val() + '"></div><script src="https://shuffledex.github.io/ContentDistributionWidget/party/widget.min.js"></script>' 
             $('#script').val(script);
         } else {}
     })
