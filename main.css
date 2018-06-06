@@ -13,7 +13,7 @@ body {
 
 #index i {
 	position: absolute;
-	top: 30px;
+	top: 0;
 	right: 0;
 	font-size: 13rem;
 	color: #F35E51;

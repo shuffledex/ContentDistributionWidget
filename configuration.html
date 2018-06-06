@@ -9,7 +9,6 @@
 
 	<link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel="stylesheet" type='text/css'/>
-	<link href='https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css' rel="stylesheet" type='text/css'/>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css' rel="stylesheet" type='text/css'/>
 	<link href='https://use.fontawesome.com/releases/v5.0.13/css/all.css' rel='stylesheet' type='text/css' />
 	<link href='main.css' rel='stylesheet' type='text/css' />
@@ -22,17 +21,20 @@
 
 	<div class="container">
 		<div class="row">
+			<p>Sell any digital content throught your website with this widget and you will can get paid in NAS for their work. You will have an embedding code for your websites. When the user wants donwload your content, first its need paid in NAS. Once the transaction is successfuly, the user will be can download the content. Easy, faster and free.</p>
+		</div>
+		<div class="row">
 			<div class="seven columns">
 				<div class="row">
 					<h3>Let’s customize what your customers will see</h3>
 					<form>
 						<div class="row">
 							<label for="content">Content URL</label>
-							<input class="u-full-width" type="text" placeholder="The content your user will download" id="content" value="">
+							<input class="u-full-width" type="text" placeholder="The content URL (zip, pdf, etc) your users will download after paid" id="content" value="">
 							<label for="price">Price</label>
-							<input class="u-full-width" type="text" placeholder="Enter the price of the download (in NAS)" id="price" value="">
+							<input class="u-full-width" type="text" placeholder="Enter the price in NAS for download your content" id="price" value="">
 							<label for="title">Title</label>
-							<input class="u-full-width" type="text" placeholder="Content title goes here" id="title" value="">
+							<input class="u-full-width" type="text" placeholder="The title of your digital content" id="title" value="">
 							<label for="introduction">Introduction</label>
 							<textarea class="u-full-width" placeholder="Small introduction of the content" id="introduction"></textarea>
 						</div>
@@ -58,8 +60,8 @@
 							<a class="button button-primary flip" href="#" onclick="rotateCard(this)">View Code <i class="fas fa-sync-alt"></i></a>
 						</div>
 						<div id="widget">
-							<p class="title">Your title will be here...</p>
-							<p class="introduction">Your introduction will be here...</p>
+							<p class="title">Title of your digital content</p>
+							<p class="introduction">Small introduction of the content</p>
 							<a class="button button-primary u-full-width buy" href="#">Buy for <span id="nasPrice">0</span> NAS</a>
 							<p class="u-pull-right"><img src="images/nebulas.png" style="width:75px" /></p>
 						</div>
@@ -89,7 +91,6 @@
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 	<script src="libs/nebPay.js"></script>
 	<script src="main.js"></script>
 </body>

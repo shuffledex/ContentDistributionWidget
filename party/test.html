@@ -3,10 +3,70 @@
 <head>
 	<meta charset="utf-8">
 	<title>Test Widget</title>
+	<style type="text/css">
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #38384D
+		}
+		.wrapper {
+			border:1px solid #ddd;
+		}
+		.w3-light-grey, .w3-hover-light-grey:hover,
+		.w3-light-gray, .w3-hover-light-gray:hover {
+			color: #000!important;
+			background-color: #f1f1f1!important;
+		}
+		.w3-center {
+			text-align: center!important;
+		}
+		h1, h2, h3, h4, h5, h6 {
+			font-weight: 400;
+		}
+		h3 {
+			font-size: 24px;
+		}
+		.newspaper {
+			background: grey;
+			xborder: 1px black solid;
+			padding: 15px;
+			-webkit-column-count: 3;
+			-moz-column-count: 3;
+			column-count: 3;
+			-webkit-column-gap: 40px;
+			-moz-column-gap: 40px;
+			column-gap: 40px;
+			-webkit-column-rule: 1px solid lightgrey;
+			-moz-column-rule: 1px solid lightgrey;
+			column-rule: 1px solid lightgrey;
+			color: white;
+		}
+		.w3-large {
+			font-size: 18px!important;
+			color: white;
+		}
+		.widgetWrapper {
+			margin: 30px;
+			text-align: center;
+			color: white;
+		}
+		#widget {
+			margin: 0 auto;
+		}
+	</style>
 </head>
-<body style="background-color: #38384D">
+<body>
 
-	<div id="contentDistributionWidget" data-price="0.00001" data-title="Smart Contract" data-introduction="The smart contract code behind Content Distribution Widget" data-wallet="Y2bkp3Z4dN" data-content="https://explorer.nebulas.io/#/tx/d22882dd28c7d8e8c5e5cc6d552f1709c23c53db247fecaccb3a1a50ca97cf5d"></div><script src="https://shuffledex.github.io/ContentDistributionWidget/party/widget.min.js"></script>
+	<div class="wrapper">
+		<div class="w3-light-grey w3-center" style="padding:32px 64px"><h3>The C++ Programming Language book</h3></div>
+		<p class="newspaper">
+			This book features an enhanced, layflat binding, which allows the book to stay open more easily when placed on a flat surface. This special binding method—noticeable by a small space inside the spine—also increases durability. C++11 has arrived: thoroughly master it, with the definitive new guide from C++ creator Bjarne Stroustrup, C++ Programming Language, Fourth Edition! The brand-new edition of the worlds most trusted and widely read guide to C++, it has been comprehensively updated for the long-awaited C++11 standard. Extensively rewritten to present the C++11 language, standard library, and key design techniques as an integrated whole, Stroustrup thoroughly addresses changes that make C++11 feel like a whole new language, offering definitive guidance for leveraging its improvements in performance, reliability, and clarity. C++ programmers around the world recognize Bjarne Stoustrup as the go-to expert for the absolutely authoritative and exceptionally useful information they need to write outstanding C++ programs. Now, as C++11 compilers arrive and development organizations migrate to the new standard, they know exactly where to turn once more: Stoustrup C++ Programming Language, Fourth Edition.
+		</p>
+	</div>
+
+	<div class="widgetWrapper">
+		<div id="contentDistributionWidget" data-price="0.00001" data-title="The C++ Programming Language Book" data-introduction="Buy The C++ Programming Language, 4th Edition in PDF format" data-wallet="Y2bkp3Z4dN" data-content="https://explorer.nebulas.io/#/tx/d22882dd28c7d8e8c5e5cc6d552f1709c23c53db247fecaccb3a1a50ca97cf5d"></div><script src="https://shuffledex.github.io/ContentDistributionWidget/party/widget.min.js"></script>
+		<p>Once the transfer is done, wait a few seconds and the download will start</p>
+	</div>
 
 </body>
 </html>

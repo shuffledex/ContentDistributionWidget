@@ -30,14 +30,14 @@ $('#price').on('input', function() {
 $('#title').on('input', function() { 
     $('#widget').find('.title').html($(this).val())
     if ($(this).val() == "") {
-       $('#widget').find('.title').html("Your title will be here...") 
+       $('#widget').find('.title').html("Title of your digital content") 
     }
 });
 
 $('#introduction').on('input', function() { 
     $('#widget').find('.introduction').html($(this).val())
     if ($(this).val() == "") {
-       $('#widget').find('.introduction').html("Your introduction will be here...") 
+       $('#widget').find('.introduction').html("Small introduction of the content") 
     }
 });
 
